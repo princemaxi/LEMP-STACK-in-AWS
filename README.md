@@ -112,7 +112,7 @@ Login to the AWS Management Console: https://aws.amazon.com/console/
 
 - Service: Search for EC2 → click on Launch Instance
 
-![Alt text](images/ec2a.png)
+![Alt text](IMAGES/ec2a.png)
 ![Alt text](images/ec2b.png)
 
 - Name: Give your instance a name, here we name it `lemp-server`,
