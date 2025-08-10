@@ -113,25 +113,25 @@ Login to the AWS Management Console: https://aws.amazon.com/console/
 - Service: Search for EC2 → click on Launch Instance
 
 ![Alt text](IMAGES/ec2a.png)
-![Alt text](images/ec2b.png)
+![Alt text](IMAGES/ec2b.png)
 
 - Name: Give your instance a name, here we name it `lemp-server`,
 
-![Alt text](images/ec2c.png)
+![Alt text](IMAGES/ec2c.png)
 
 - AMI: Ubuntu Server 24.04 LTS
 
-![Alt text](images/ec2d.png)
+![Alt text](IMAGES/ec2d.png)
 
 - Instance type: chose an instance, here we pick `t2.micro` (free tier) and click on `create new key pair`
 
-![Alt text](images/ec2e.png)
+![Alt text](IMAGES/ec2e.png)
 
 **2. Key pair**
 
 - Create key pair: Give your key a name,  here: `lempserver-key` using (RSA .pem) click on `create key pair` → Download once and store secure.
 
-![Alt text](images/ec2f.png)
+![Alt text](IMAGES/ec2f.png)
 
 - Storage: adjust as required (default is fine for this demo)
 
@@ -140,38 +140,38 @@ Login to the AWS Management Console: https://aws.amazon.com/console/
 - Ensure your chosen subnet has Auto-assign Public IPv4 enabled (or you will not have a public IP).
 - Auto-assign public IP is important: without it the instance is private and unreachable from the internet unless you associate an Elastic IP or have a bastion host. Click edit to enable Auto-assign IP
 
-![Alt text](images/ec2g.png)
+![Alt text](IMAGES/ec2g.png)
 
 **4. Security group**
 - Click on create security group
 
-![Alt text](images/ec2h.png)
+![Alt text](IMAGES/ec2h.png)
 
 - Enable Inbound Rule:
 
 - SSH (TCP 22) from your IP (restrict to your IP for security) — for testing 0.0.0.0/0 but not recommended for prod. This is enabled by default.
 
-![Alt text](images/ec2i.png)
+![Alt text](IMAGES/ec2i.png)
 
 - HTTP (TCP 80) from anywhere (0.0.0.0/0). Click on `Add security group rule`
 
-![Alt text](images/ec2j.png)
-![Alt text](images/ec2k.png)
+![Alt text](IMAGES/ec2j.png)
+![Alt text](IMAGES/ec2k.png)
 
 - Outbound: Default outbound allow (so instance can talk to the internet).
 
 **5. Launch and wait until running and status checks are passing.**
 
-![Alt text](images/ec2l.png)
+![Alt text](IMAGES/ec2l.png)
 
 - When you get the `Success` prompt our instance is ready for use. click on the instance ID to view instance details
 
-![Alt text](images/ec2m.png)
+![Alt text](IMAGES/ec2m.png)
 
 - Click on `Connect` and select the `SSH` tab to view details for SSHing into your  instance
 
-![Alt text](images/ec2n.png)
-![Alt text](images/ssh1.png)
+![Alt text](IMAGES/ec2n.png)
+![Alt text](IMAGES/ssh1.png)
 
 **6. Optional — Elastic IP**
 
@@ -190,8 +190,8 @@ chmod 400 ~/lempserver-key.pem
 ssh -i ~/lempserver-key.pem ubuntu@<EC2-Public-IP>
 ```
 
-![Alt text](images/ssh2.png)
-![Alt text](images/ssh3.png)
+![Alt text](IMAGES/ssh2.png)
+![Alt text](IMAGES/ssh3.png)
 
 ---
 
@@ -204,15 +204,15 @@ sudo apt update
 sudo apt install -y nginx
 ```
 
-![Alt text](images/n1.png)
-![Alt text](images/n2.png)
+![Alt text](IMAGES/n1.png)
+![Alt text](IMAGES/n2.png)
 
 - To confirm if `nginx` is now active, run:
 
 ```bash
 sudo systemctl status nginx
 ```
-![Alt text](images/n3.png)
+![Alt text](IMAGES/n3.png)
 
 - If nginx is not active, run this to enable/activate nginx:
 
@@ -228,7 +228,7 @@ curl http://127.0.0.1:80
 ```
 If you see `HTTP/1.1 200 OK` or the default Nginx HTML, Nginx is serving.
 
-![Alt text](images/n4.png)
+![Alt text](IMAGES/n4.png)
 
 - Test on a browser
 
@@ -236,7 +236,7 @@ If you see `HTTP/1.1 200 OK` or the default Nginx HTML, Nginx is serving.
 http://<EC2-Public-IP>:80
 ```
 
-![Alt text](images/n5.png)
+![Alt text](IMAGES/n5.png)
 
 ---
 
@@ -249,8 +249,8 @@ sudo systemctl enable --now mysql
 sudo mysql
 ```
 
-![Alt text](images/ms1.png)
-![Alt text](images/ms2.png)
+![Alt text](IMAGES/ms1.png)
+![Alt text](IMAGES/ms2.png)
 
 - Inside mysql shell: Run;
 
@@ -259,7 +259,7 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PassWord
 EXIT;
 ```
 
-![Alt text](images/ms3.png)
+![Alt text](IMAGES/ms3.png)
 
 - Then run:
 
@@ -267,7 +267,7 @@ EXIT;
 sudo mysql_secure_installation
 ```
 
-![Alt text](images/ms4.png)
+![Alt text](IMAGES/ms4.png)
 
 - Follow prompts to remove test DBs, disable remote root login (unless you need it), and set recommended security options.
 
@@ -277,7 +277,7 @@ sudo mysql -p
 ```
     input the password you set earlier, if logged in to mysql successfully then you are on track. Exit.
 
-![Alt text](images/ms5.png)
+![Alt text](IMAGES/ms5.png)
 
 ---
 
@@ -290,7 +290,7 @@ sudo apt install -y php-fpm php-mysql
 php -v
 ```
 
-![Alt text](images/php1.png)
+![Alt text](IMAGES/php1.png)
 
 ---
 
@@ -303,7 +303,7 @@ sudo mkdir -p /var/www/projectLEMP
 sudo chown -R $USER:$USER /var/www/projectLEMP
 ```
 
-![Alt text](images/php2.png)
+![Alt text](IMAGES/php2.png)
 
 - Create site config:
 
@@ -311,7 +311,7 @@ sudo chown -R $USER:$USER /var/www/projectLEMP
 sudo nano /etc/nginx/sites-available/projectLEMP
 ```
 
-![Alt text](images/php3a.png)
+![Alt text](IMAGES/php3a.png)
 
 - Paste and save
 
@@ -340,7 +340,7 @@ server {
 }
 ```
 
-![Alt text](images/php3.png)
+![Alt text](IMAGES/php3.png)
 
 - Enable, test and reload:
 
@@ -351,8 +351,8 @@ sudo unlink /etc/nginx/sites-enabled/default
 sudo systemctl reload nginx
 ```
 
-![Alt text](images/php4.png)
-![Alt text](images/php5.png)
+![Alt text](IMAGES/php4.png)
+![Alt text](IMAGES/php5.png)
 
 ---
 
@@ -363,7 +363,7 @@ sudo systemctl reload nginx
 ```bash
 sudo nano /var/www/projectLEMP/index.html
 ```
-![Alt text](images/php6a.png)
+![Alt text](IMAGES/php6a.png)
 
 -Paste and save
 
@@ -381,11 +381,11 @@ sudo nano /var/www/projectLEMP/index.html
 ```
 (Replace $(hostname) manually if copying.)
 
-![Alt text](images/php6.png)
+![Alt text](IMAGES/php6.png)
 
 - Visit in browser: `http://<EC2-Public-IP>:80`
 
-![Alt text](images/php9.png)
+![Alt text](IMAGES/php9.png)
 
 - Create PHP info (temporary):
 
@@ -393,7 +393,7 @@ sudo nano /var/www/projectLEMP/index.html
 sudo nano /var/www/projectLEMP/info.php 
 ```
 
-![Alt text](images/php11.png)
+![Alt text](IMAGES/php11.png)
 
 - Paste and save
 
@@ -402,17 +402,17 @@ sudo nano /var/www/projectLEMP/info.php
 phpinfo();
 ```
 
-![Alt text](images/php10.png)
+![Alt text](IMAGES/php10.png)
 
 - Visit in browser: `http://<EC2-Public-IP>/info.php` — delete `info.php` after verifying to maintain security:
 
-![Alt text](images/php12.png)
+![Alt text](IMAGES/php12.png)
 
 ```bash
 sudo rm /var/www/projectLEMP/info.php
 ```
 
-![Alt text](images/php13.png)
+![Alt text](IMAGES/php13.png)
 
 ---
 
@@ -431,7 +431,7 @@ sudo mysql -p
 CREATE DATABASE example_database;
 ```
 
-![Alt text](images/z1.png)
+![Alt text](IMAGES/z1.png)
 
 - Next, create a database user and assign all priviledges to your user. Exit
 
@@ -440,7 +440,7 @@ CREATE USER 'example_user'@'%' IDENTIFIED WITH mysql_native_password BY 'PassWor
 GRANT ALL PRIVILEGES ON example_database.* TO 'example_user'@'%';
 ```
 
-![Alt text](images/z2.png)
+![Alt text](IMAGES/z2.png)
 
 - Login to your database user and input your password
 
@@ -448,7 +448,7 @@ GRANT ALL PRIVILEGES ON example_database.* TO 'example_user'@'%';
 mysql -u example_user -p
 ```
 
-![Alt text](images/z3.png)
+![Alt text](IMAGES/z3.png)
 
 - Confirm you have access to the `example_database' database:
 
@@ -456,7 +456,7 @@ mysql -u example_user -p
 SHOW DATABASES;
 ```
 
-![Alt text](images/z4.png)
+![Alt text](IMAGES/z4.png)
 
 - Create a table in the database named `todo_list', run the following statement:
 
@@ -468,7 +468,7 @@ CREATE TABLE example_database.todo_list (
 );
 ``` 
 
-![Alt text](images/z5.png)
+![Alt text](IMAGES/z5.png)
 
 - Now, use the `INSERT` statement to insert a few rows of content in the test table, you might want to repeat the command a few times using different values:
 
@@ -477,7 +477,7 @@ INSERT INTO example_database.todo_list (content) VALUES
 ('My first important item'),
 ```
 
-![Alt text](images/z6.png)
+![Alt text](IMAGES/z6.png)
 
 - To confirm the data was successfully saved to your table, run:
 
@@ -485,7 +485,7 @@ INSERT INTO example_database.todo_list (content) VALUES
 SELECT * FROM example_database.todo_list;
 ```
 
-![Alt text](images/z7.png)
+![Alt text](IMAGES/z7.png)
 
 - After confirming you can exit the MYSQL console
 
@@ -503,7 +503,7 @@ EXIT;
 sudo nano /var/www/projectLEMP/todo_list.php 
 ```
 
-![Alt text](images/z10png.png)
+![Alt text](IMAGES/z10png.png)
 
 - Paste in the following PHP script and save
 
@@ -529,11 +529,11 @@ try {
 ?>
 ```
 
-![Alt text](images/z8.png)
+![Alt text](IMAGES/z8.png)
 
 - Visit: `http://<EC2-Public-IP>/todo_list.php` You should see a page like this:
 
-![Alt text](images/z9.png)
+![Alt text](IMAGES/z9.png)
 
 ---
 
